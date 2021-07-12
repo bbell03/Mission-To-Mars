@@ -7,12 +7,11 @@ from bs4 import BeautifulSoup as soup
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 
-#Set up Splinter
-executable_path = {'executable_path': '/Users/brandonbell/Documents/bootcamp/Mission-To-Mars'}
-browser = Browser('chrome', **executable_path, headless=False)
-
 
 def mars_news(browser):
+    #Set up Splinter
+    #executable_path = {'executable_path': '/Users/brandonbell/Documents/bootcamp/Mission-To-Mars'}
+    #browser = Browser('chrome', **executable_path, headless=False)
     # Visit the mars nasa news site
     url = 'https://redplanetscience.com'
     browser.visit(url)

@@ -46,7 +46,14 @@
             <h4>Mars Facts</h4>
             {{ mars.facts | safe }}
           </div>
+          <div class="row" id="mars-hemispheres">
+            <h4>Hemispheres</h4>
+            {% for hemisphere in mars.hemispheres %}
+            stuff stuff
+            {% endfor %}
+          </div>
         </div>
+      </div>
       </div>
     </div>
   </body>

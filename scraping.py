@@ -6,6 +6,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup as soup
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
+import datetime as dt
 
 
 def mars_news(browser):
@@ -61,7 +62,7 @@ def featured_image(browser):
 
     return img_url
 
-def mars_fact():
+def mars_facts():
     try:
         #use 'read_html' to scrape the facts table into a dataframe
         df = pd.read_html('https://galaxyfacts-mars.com')[0]
@@ -74,6 +75,28 @@ def mars_fact():
 
     #Convert dataframe into HTML format, add bootstrap
     return df.to_html()
+
+def hemispheres():
+    # 1. Use browser to visit the URL
+    url = 'https://marshemispheres.com/'
+
+    browser.visit(url)
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+
+    # 2. Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+
+    # 3. Write code to retrieve the image urls and titles for each hemisphere.
+    # find the relative image url
+    hemisphere_titles = img_soup.find_all('h3')
+    hemisphere_imgs = img_soup.find_all('img', class_='thumb')
+
+    for i in range(len(hemisphere_imgs)):
+        hemisphere_image_urls.append({'img_url':hemisphere_imgs[i]['src']})
+        hemisphere_image_urls.append({'title':hemisphere_titles[i].text})
+
+    return hemisphere_image_urls
 
 def scrape_all():
     # Initiate headless driver for deployment
@@ -92,7 +115,7 @@ def scrape_all():
 
     # Stop webdriver and return dataframe
     browser.quit()
-    return dataframe
+    return data
 
 
 if __name__ == "__main__":

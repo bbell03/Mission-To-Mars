@@ -18,7 +18,9 @@ def index():
 def scrape():
     mars = mongo.db.mars
     mars_data = scraping.scrape_all()
+    hemispheres = scraping.hemispheres()
     mars.update({}, mars_data, upsert=True)
+    mars.update({}, hemispheres, upsert=True)
     return redirect('/', code=302)
 
 

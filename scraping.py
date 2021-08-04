@@ -80,7 +80,7 @@ def hemispheres_scrape(browser):
     # 1. Use browser to visit the URL
     url = 'https://marshemispheres.com/'
 
-    browser.visit(url)
+    browser.visit(url + 'index.html')
     html = browser.html
     img_soup = soup(html, 'html.parser')
 
@@ -91,10 +91,12 @@ def hemispheres_scrape(browser):
     # find the relative image url
     hemisphere_titles = img_soup.find_all('h3')
     hemisphere_imgs = img_soup.find_all('img', class_='thumb')
+    print(hemisphere_imgs)
 
     for i in range(len(hemisphere_imgs)):
         hemisphere_image_urls.append({'img_url':hemisphere_imgs[i]['src'],
                                       'title':hemisphere_titles[i].text})
+        print(hemisphere_image_urls[i].img_url)
 
     return hemisphere_image_urls
 
